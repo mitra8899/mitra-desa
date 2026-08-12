@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra Desa - Portal Berita Kecamatan Kradenan</title>
+    
+    <!-- Meta Tags Profesional untuk Preview Link (Open Graph / WhatsApp / Facebook / Telegram) -->
+    <meta property="og:title" content="Mitra Desa - Portal Berita Kecamatan Kradenan">
+    <meta property="og:description" content="Portal resmi informasi kemajuan desa, penguatan BUMDesa, KOPDES Merah Putih, dan kegiatan warga se-Kecamatan Kradenan.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card Data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mitra Desa - Portal Berita Kecamatan Kradenan">
+    <meta name="twitter:description" content="Portal resmi informasi kemajuan desa, penguatan BUMDesa, KOPDES Merah Putih, dan kegiatan warga se-Kecamatan Kradenan.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="tampilHalaman('beranda')">
+                <span class="text-2xl">🏛️</span>
+                <div>
+                    <h1 class="text-lg md:text-xl font-black tracking-tight leading-tight">MITRA DESA</h1>
+                    <p class="text-[10px] text-emerald-200 uppercase tracking-widest">Kecamatan Kradenan</p>
+                </div>
+            </div>
+            <nav class="space-x-2 md:space-x-4">
+                <button onclick="tampilHalaman('beranda')" class="hover:bg-emerald-600 px-3 py-2 rounded-lg font-medium transition text-sm md:text-base">Beranda</button>
+                <button onclick="tampilHalaman('tulis')" class="bg-amber-500 text-emerald-950 px-4 py-2 rounded-lg font-bold shadow hover:bg-amber-400 transition text-sm md:text-base">+ Tulis Berita</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- 1. HALAMAN BERANDA -->
+        <section id="halaman-beranda">
+            <div class="bg-gradient-to-r from-emerald-800 to-teal-700 text-white p-6 md:p-10 rounded-2xl shadow-lg mb-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="bg-emerald-600 text-emerald-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pemutakhiran Indeks Desa 2026</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold mt-2 mb-2">Membangun Kemandirian Ekonomi Kradenan</h2>
+                    <p class="text-emerald-100 text-sm md:text-base max-w-xl">Portal resmi informasi kemajuan desa, penguatan BUMDesa, KOPDES Merah Putih, dan kegiatan warga se-Kecamatan Kradenan.</p>
+                </div>
+                <button onclick="tampilHalaman('tulis')" class="bg-white text-emerald-800 font-bold px-6 py-3 rounded-xl shadow hover:bg-emerald-50 transition whitespace-nowrap">Tulis Berita Desa</button>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 mb-6 border-l-4 border-emerald-600 pl-3">Berita & Informasi Terkini</h3>
+            
+            <!-- Wadah Daftar Berita -->
+            <div id="daftar-berita" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Berita dimasukkan via JavaScript -->
+            </div>
+        </section>
+
+        <!-- 2. HALAMAN TULIS BERITA -->
+        <section id="halaman-tulis" class="hidden max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2">Publikasi Berita Kradenan</h2>
+            <p class="text-slate-500 text-sm mb-6">Bagikan informasi pembangunan, BUMDesa, atau kegiatan warga desa Anda.</p>
+            
+            <form id="form-berita" onsubmit="simpanBerita(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Judul Berita</label>
+                    <input type="text" id="judul" required class="w-full px-4 py-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Cth: Desa Sukorejo Optimalkan BUMDesa untuk Ketahanan Pangan...">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Penulis / Pelapor</label>
+                        <input type="text" id="penulis" required class="w-full px-4 py-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Cth: Tim SID Kradenan">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Kategori</label>
+                        <select id="kategori" class="w-full px-4 py-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                            <option value="Indeks Desa">Indeks Desa & Status</option>
+                            <option value="BUMDesa & KOPDES">BUMDesa & KOPDES</option>
+                            <option value="Pembangunan">Pembangunan & Infrastruktur</option>
+                            <option value="Kegiatan Warga">Kegiatan Warga</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Foto Dokumentasi (Dari Laptop)</label>
+                    <input type="file" id="gambar" accept="image/*" required class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer border rounded-xl p-1">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Isi Berita Lengkap</label>
+                    <textarea id="konten" rows="6" required class="w-full px-4 py-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Tuliskan isi berita selengkapnya di sini..."></textarea>
+                </div>
+                <div class="flex gap-4 pt-2">
+                    <button type="button" onclick="tampilHalaman('beranda')" class="w-1/3 bg-slate-200 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-300 transition">Batal</button>
+                    <button type="submit" class="w-2/3 bg-emerald-700 text-white font-bold py-3 rounded-xl hover:bg-emerald-800 transition shadow-md">Terbitkan Berita</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 3. HALAMAN DETAIL BACA BERITA -->
+        <section id="halaman-detail" class="hidden max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-slate-100">
+            <button onclick="tampilHalaman('beranda')" class="text-emerald-700 font-semibold mb-6 inline-flex items-center gap-1 hover:underline">&larr; Kembali ke Beranda</button>
+            <div id="detail-kategori" class="inline-block text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3"></div>
+            <h2 id="detail-judul" class="text-2xl md:text-4xl font-extrabold text-slate-900 mb-3"></h2>
+            <p id="detail-info" class="text-sm text-slate-500 mb-6 border-b pb-4"></p>
+            
+            <img id="detail-gambar" src="" class="w-full h-72 md:h-96 object-cover rounded-2xl mb-6 shadow-md">
+            
+            <div id="detail-konten" class="text-slate-700 leading-relaxed whitespace-pre-line mb-8 text-base md:text-lg"></div>
+            
+            <!-- Tombol Bagikan / Share -->
+            <div class="bg-emerald-50 border border-emerald-100 p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <h4 class="font-bold text-emerald-900">Bagikan Berita Ini</h4>
+                    <p class="text-xs text-emerald-700">Sebarkan informasi desa ini ke WhatsApp atau media sosial warga Kradenan.</p>
+                </div>
+                <button onclick="salinLink()" class="w-full md:w-auto bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-emerald-800 transition shadow flex items-center justify-center gap-2 text-sm">
+                    📋 Salin Tautan Berita
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-8 text-sm mt-12 border-t border-slate-800">
+        <p class="font-bold text-slate-200 mb-1">🏛️ Mitra Desa - Kecamatan Kradenan</p>
+        <p>&copy; 2026 Pemerintah Desa & Warga Kecamatan Kradenan. Wadah Informasi Mandiri.</p>
+    </footer>
+
+    <!-- Logika JavaScript -->
+    <script>
+        const beritaDefault = [
+            {
+                id: 1,
+                judul: "Kecamatan Kradenan Genjot Penguatan Ekonomi Lewat BUMDesa & KOPDES Merah Putih",
+                penulis: "Tim Redaksi Kecamatan",
+                kategori: "BUMDesa & KOPDES",
+                tanggal: "11 Agustus 2026",
+                gambar: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
+                konten: "Pemerintah Kecamatan Kradenan terus mendorong optimalisasi Badan Usaha Milik Desa (BUMDesa) serta KOPDES Merah Putih guna memperkuat fondasi ekonomi kerakyatan di tingkat desa. Langkah ini seiring dengan hasil pemutakhiran Indeks Desa 2026 yang menunjukkan peningkatan status kemandirian desa-desa di wilayah Kradenan."
+            }
+        ];
+
+        function ambilDataBerita() {
+            let data = localStorage.getItem('mitra_desa_kradenan_data');
+            return data ? JSON.parse(data) : beritaDefault;
+        }
+
+        function simpanDataBerita(data) {
+            localStorage.setItem('mitra_desa_kradenan_data', JSON.stringify(data));
+        }
+
+        function tampilHalaman(halamanId, updateHistory = true) {
+            document.getElementById('halaman-beranda').classList.add('hidden');
+            document.getElementById('halaman-tulis').classList.add('hidden');
+            document.getElementById('halaman-detail').classList.add('hidden');
+
+            window.scrollTo(0, 0);
+
+            if (halamanId === 'beranda') {
+                document.title = "Mitra Desa - Portal Berita Kecamatan Kradenan";
+                document.getElementById('halaman-beranda').classList.remove('hidden');
+                muatDaftarBerita();
+                if (updateHistory) {
+                    history.pushState({}, '', window.location.pathname);
+                }
+            } else if (halamanId === 'tulis') {
+                document.title = "Tulis Berita - Mitra Desa Kradenan";
+                document.getElementById('halaman-tulis').classList.remove('hidden');
+                if (updateHistory) {
+                    history.pushState({}, '', window.location.pathname + '?page=tulis');
+                }
+            } else if (halamanId === 'detail') {
+                document.getElementById('halaman-detail').classList.remove('hidden');
+            }
+        }
+
+        function muatDaftarBerita() {
+            let daftar = ambilDataBerita();
+            let wadah = document.getElementById('daftar-berita');
+            wadah.innerHTML = '';
+
+            if (daftar.length === 0) {
+                wadah.innerHTML = '<p class="text-slate-400 col-span-3 text-center py-8">Belum ada berita yang diterbitkan.</p>';
+                return;
+            }
+
+            [...daftar].reverse().forEach(berita => {
+                let card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition flex flex-col justify-between group cursor-pointer';
+                card.onclick = () => bacaBerita(berita.id);
+                card.innerHTML = `
+                    <div class="overflow-hidden h-48">
+                        <img src="${berita.gambar}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between">
+                        <div>
+                            <span class="text-[11px] bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">${berita.kategori}</span>
+                            <h3 class="text-lg font-bold text-slate-900 mt-2 mb-2 group-hover:text-emerald-700 transition line-clamp-2">${berita.judul}</h3>
+                            <p class="text-slate-600 text-sm line-clamp-2 mb-4">${berita.konten}</p>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-400 border-t pt-3">
+                            <span>Oleh: <strong class="text-slate-600">${berita.penulis}</strong></span>
+                            <span class="text-emerald-700 font-bold">Baca &rarr;</span>
+                        </div>
+                    </div>
+                `;
+                wadah.appendChild(card);
+            });
+        }
+
+        function simpanBerita(event) {
+            event.preventDefault();
+            
+            let judul = document.getElementById('judul').value;
+            let penulis = document.getElementById('penulis').value;
+            let kategori = document.getElementById('kategori').value;
+            let konten = document.getElementById('konten').value;
+            let fileInput = document.getElementById('gambar');
+            
+            let file = fileInput.files[0];
+            let reader = new FileReader();
+
+            reader.onload = function(e) {
+                let tanggalSekarang = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                let beritaBaru = {
+                    id: Date.now(),
+                    judul,
+                    penulis,
+                    kategori,
+                    tanggal: tanggalSekarang,
+                    gambar: e.target.result,
+                    konten
+                };
+
+                let daftar = ambilDataBerita();
+                daftar.push(beritaBaru);
+                simpanDataBerita(daftar);
+
+                document.getElementById('form-berita').reset();
+                tampilHalaman('beranda');
+                alert('Berita desa berhasil diterbitkan!');
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function bacaBerita(id, updateHistory = true) {
+            let daftar = ambilDataBerita();
+            let berita = daftar.find(b => b.id === Number(id));
+
+            if (berita) {
+                // Mengubah Judul Tab Browser Secara Dinamis
+                document.title = berita.judul + " - Mitra Desa Kradenan";
+
+                document.getElementById('detail-kategori').innerText = berita.kategori;
+                document.getElementById('detail-judul').innerText = berita.judul;
+                document.getElementById('detail-info').innerText = `Dilaporkan oleh ${berita.penulis} • ${berita.tanggal}`;
+                document.getElementById('detail-gambar').src = berita.gambar;
+                document.getElementById('detail-konten').innerText = berita.konten;
+                
+                document.getElementById('halaman-detail').setAttribute('data-id', berita.id);
+                tampilHalaman('detail', false);
+
+                if (updateHistory) {
+                    history.pushState({}, '', window.location.pathname + '?id=' + berita.id);
+                }
+            } else {
+                tampilHalaman('beranda');
+            }
+        }
+
+        function salinLink() {
+            let id = document.getElementById('halaman-detail').getAttribute('data-id');
+            let urlAktif = window.location.origin + window.location.pathname + '?id=' + id;
+            
+            navigator.clipboard.writeText(urlAktif).then(() => {
+                alert('Tautan berita berhasil disalin! Bagikan ke grup WhatsApp warga Kradenan.');
+            });
+        }
+
+        window.onload = function() {
+            let params = new URLSearchParams(window.location.search);
+            let idBerita = params.get('id');
+            let halaman = params.get('page');
+
+            if (idBerita) {
+                bacaBerita(idBerita, false);
+            } else if (halaman === 'tulis') {
+                tampilHalaman('tulis', false);
+            } else {
+                tampilHalaman('beranda', false);
+            }
+        };
+    </script>
+</body>
+</html>
